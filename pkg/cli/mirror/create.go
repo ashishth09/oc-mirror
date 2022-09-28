@@ -59,6 +59,7 @@ func (o *MirrorOptions) Create(ctx context.Context, cfg v1alpha2.ImageSetConfigu
 	switch {
 	case merr != nil:
 		klog.Info("No metadata detected, creating new workspace")
+		klog.Info("Hello")
 		meta.Uid = uuid.New()
 		thisRun.Sequence = 1
 		thisRun.Mirror = cfg.Mirror

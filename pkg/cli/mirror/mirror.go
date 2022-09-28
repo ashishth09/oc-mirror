@@ -331,6 +331,7 @@ func (o *MirrorOptions) mirrorImages(ctx context.Context, cleanup cleanupFunc) e
 		if err != nil {
 			return err
 		}
+		klog.V(1).Info("XXXXXX mapping mirror.go   XXXXX", mapping, "\n")
 
 		prunedAssociations, err := o.removePreviouslyMirrored(mapping, meta)
 		if err != nil {
@@ -601,6 +602,7 @@ func (o *MirrorOptions) removePreviouslyMirrored(images image.TypedImageMapping,
 		return image.AssociationSet{}, err
 	}
 
+	klog.V(1).Info("XXXX mirror.go prevDownloads XXXX ", prevDownloads, images, "\n")
 	if o.IgnoreHistory {
 		return prevDownloads, nil
 	}
@@ -619,6 +621,8 @@ func (o *MirrorOptions) removePreviouslyMirrored(images image.TypedImageMapping,
 			keep = append(keep, srcRef.Ref.String())
 		}
 	}
+
+	klog.V(1).Info("XXXX mirror.go prune XXXX ", keep, "\n")
 
 	prunedDownloads, err := image.Prune(prevDownloads, keep)
 	if err != nil {
